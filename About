@@ -1,0 +1,363 @@
+# Development Setup
+
+## Project Name
+
+JaiHub
+
+---
+
+# System Information
+
+## Operating System
+
+Ubuntu Linux
+
+## Node.js
+
+v22.22.3
+
+## npm
+
+v10.9.8
+
+## Git
+
+git version 2.43.0
+
+---
+
+# Installed Software
+
+## PostgreSQL
+
+Version: 16.14
+
+Purpose:
+
+* Primary Database
+* Stores Users
+* Drivers
+* Vehicles
+* Rides
+* Payments
+* Ratings
+
+---
+
+## Redis
+
+Version: 8.8.0
+
+Purpose:
+
+* Driver Geolocation Storage
+* Redis GEOSEARCH
+* Caching
+* Rate Limiting
+* BullMQ Queues
+
+---
+
+## Docker
+
+Version: 29.5.2
+
+Purpose:
+
+* Containerization
+* Local Development
+* Deployment Preparation
+
+---
+
+## Docker Compose
+
+Version: v5.1.4
+
+Purpose:
+
+* Multi-Service Management
+* PostgreSQL Container
+* Redis Container
+* Backend Services
+
+---
+
+## pgAdmin
+
+Installed
+
+Purpose:
+
+* PostgreSQL Database Administration
+
+---
+
+## Postman
+
+Installed
+
+Purpose:
+
+* API Testing
+* Endpoint Validation
+
+---
+
+# VS Code Extensions
+
+## Frontend
+
+Installed Extensions:
+
+* ESLint
+* Prettier
+* Tailwind CSS IntelliSense
+* TypeScript Hero
+* Error Lens
+
+---
+
+## Backend
+
+Installed Extensions:
+
+* NestJS Files
+* REST Client
+* Thunder Client
+
+---
+
+# Global Packages
+
+## NestJS CLI
+
+Version: 11.0.21
+
+Installation:
+
+npm install -g @nestjs/cli
+
+Purpose:
+
+* NestJS Project Creation
+* Code Generation
+* Backend Development
+
+---
+
+# Project Dependencies
+
+## Prisma
+
+Version: 7.8.0
+
+Installation:
+
+npm install prisma --save-dev
+
+Purpose:
+
+* ORM
+* Schema Management
+* Database Migrations
+
+---
+
+## Prisma Client
+
+Version: 7.8.0
+
+Installation:
+
+npm install @prisma/client
+
+Purpose:
+
+* Database Access Layer
+
+---
+
+## BullMQ
+
+Installed
+
+Purpose:
+
+* Background Job Processing
+* Queue Management
+
+---
+
+## ioredis
+
+Installed
+
+Purpose:
+
+* Redis Connectivity
+* BullMQ Integration
+
+---
+
+# Planned Technologies
+
+## Frontend
+
+* Next.js
+* TypeScript
+* Tailwind CSS
+
+---
+
+## Backend
+
+* NestJS
+* TypeScript
+
+---
+
+## Database
+
+* PostgreSQL
+* Prisma ORM
+
+---
+
+## Cache Layer
+
+* Redis
+
+---
+
+## Queue System
+
+* BullMQ
+
+---
+
+## Realtime Communication
+
+* Socket.IO
+
+---
+
+## Maps & Geolocation
+
+* OpenStreetMap
+* Leaflet.js
+
+---
+
+## Authentication & Authorization
+
+* JWT
+* RBAC
+
+---
+
+## Containerization
+
+* Docker
+* Docker Compose
+
+---
+
+## Version Control
+
+* Git
+* GitHub
+
+---
+
+## Future Technologies
+
+* Kubernetes
+* Kafka
+* AWS
+* Prometheus
+* Grafana
+
+---
+
+# Project Status
+
+## Completed
+
+* Environment Setup
+* Node.js Upgrade to v22
+* PostgreSQL Setup
+* Redis Setup
+* Docker Setup
+* Prisma Installation
+* NestJS CLI Installation
+* Project Structure Creation
+* PRD Documentation
+* GitHub Repository Initialization
+
+---
+
+## Upcoming Tasks
+
+* Database Schema Design
+* Ride State Machine Design
+* API Contract Design
+* Security Design
+* Failure Scenario Design
+* Prisma Schema Creation
+* NestJS Backend Setup
+* Next.js Frontend Setup
+* Redis GEOSEARCH Implementation
+* Ride Matching Engine
+* Realtime Driver Tracking
+* Payment Integration
+* Dockerization
+
+---
+
+# Folder Structure
+
+JaiHub/
+
+├── architecture/
+
+├── backend/
+
+├── database/
+
+├── docker/
+
+├── docs/
+
+│   ├── PRD.md
+
+│   ├── DB-Schema.md
+
+│   ├── API-Contracts.md
+
+│   ├── Ride-State-Machine.md
+
+│   ├── Failure-Scenarios.md
+
+│   ├── Security-Design.md
+
+│   └── Development-Setup.md
+
+└── frontend/
+
+---
+
+# Development Goal
+
+Build a production-grade ride aggregation platform that demonstrates:
+
+* Full Stack Development
+* System Design
+* PostgreSQL
+* Redis
+* Realtime Systems
+* Docker
+* Queue Processing
+* Scalable Backend Architecture
+
+while targeting Software Engineer roles in top-tier product and service companies.
