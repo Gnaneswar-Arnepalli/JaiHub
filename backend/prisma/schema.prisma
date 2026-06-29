@@ -13,3 +13,203 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum DriverStatus {
+  ONLINE
+  BUSY
+  OFFLINE
+}
+
+enum RideStatus {
+  REQUESTED
+  SEARCHING_DRIVER
+  DRIVER_ASSIGNED
+  DRIVER_ARRIVING
+  DRIVER_ARRIVED
+  RIDE_STARTED
+  RIDE_COMPLETED
+  PAYMENT_PENDING
+  PAYMENT_COMPLETED
+  CANCELLED_BY_USER
+  CANCELLED_BY_DRIVER
+  FAILED
+}
+
+enum VehicleType {
+  BIKE
+  AUTO
+  CAB
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum Provider {
+  UBER
+  OLA
+  RAPIDO
+}
+
+enum CommissionStatus {
+  PENDING
+  SETTLED
+}
+
+enum RideEventType {
+  RIDE_REQUESTED
+  SEARCHING_DRIVER
+  DRIVER_ASSIGNED
+  DRIVER_ACCEPTED
+  DRIVER_ARRIVING
+  DRIVER_ARRIVED
+  OTP_VERIFIED
+  RIDE_STARTED
+  RIDE_COMPLETED
+  PAYMENT_PENDING
+  PAYMENT_SUCCESS
+  PAYMENT_FAILED
+  USER_CANCELLED
+  DRIVER_CANCELLED
+}
+
+enum UserRole {
+  PASSENGER
+  ADMIN
+  SUPPORT
+  OPERATIONS
+}
+
+model User {
+  id             String   @id @default(uuid())
+  name           String
+  email          String?  @unique
+  phoneNumber    String   @unique
+  hashedPassword String
+
+  isActive       Boolean  @default(true)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  rides          Ride[]
+
+  driver Driver?
+}
+
+model Driver {
+  id              String @id @default(uuid())
+
+  userId          String @unique
+  user            User @relation(fields: [userId], references: [id])
+
+  licenseNumber   String @unique
+  vehicleNumber   String @unique
+
+  vehicleType     VehicleType
+  provider        Provider
+
+  status          DriverStatus
+  rating          Float @default(5.0)
+
+  isVerified      Boolean @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  rides           Ride[]
+}
+
+
+model Ride {
+  id                  String   @id @default(uuid())
+
+  userId              String
+  user                User @relation(fields: [userId], references: [id])
+
+  driverId            String?
+  driver              Driver? @relation(fields: [driverId], references: [id])
+
+  pickupLocation      String
+  destinationLocation String
+
+  vehicleType         VehicleType
+  provider            Provider
+
+  otp                 String
+
+  status              RideStatus
+
+  estimatedFare       Float
+  finalFare           Float?
+
+  estimatedDistance   Float
+  actualDistance      Float?
+
+  paymentStatus       PaymentStatus
+
+  requestedAt         DateTime @default(now())
+  startedAt           DateTime?
+  completedAt         DateTime?
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  payment             Payment?
+  commission          Commission?
+  rideEvents          RideEvent[]
+}
+
+model Payment {
+  id              String @id @default(uuid())
+
+  rideId          String @unique
+  ride            Ride @relation(fields: [rideId], references: [id])
+
+  transactionId   String? @unique
+
+  amount          Float
+
+  paymentMethod   String
+
+  status          PaymentStatus
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Commission {
+  id                 String @id @default(uuid())
+
+  rideId             String @unique
+  ride               Ride @relation(fields: [rideId], references: [id])
+
+  fareAmount         Float
+  commissionAmount   Float
+  driverAmount       Float
+
+  status             CommissionStatus
+
+  settledAt          DateTime?
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model RideEvent {
+  id          String        @id @default(uuid())
+
+  rideId      String
+  ride        Ride          @relation(fields: [rideId], references: [id])
+
+  eventType   RideEventType
+
+  performedBy String?
+  metadata    Json?
+
+  createdAt   DateTime      @default(now())
+}
